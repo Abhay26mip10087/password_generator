@@ -16,10 +16,10 @@ A simple command-line tool written in Python that generates secure, random passw
 
 ## Usage
 
-1. Save the script as `hello.py`
+1. Save the script as `password_generator.py`
 2. Run it from your terminal:
 
-   python hello.py
+   python password_generator.py
 
 
 3. Enter the desired password length when prompted (minimum 4):
