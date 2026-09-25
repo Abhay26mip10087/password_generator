@@ -1,49 +1,39 @@
-import secrets
-
+import random
 import string
 
-print("--- MY PASSWORD GENERATOR ---")
+print("--- Password Generator ---")
 
 while True:
     try:
+        length = int(input("Enter password length (min 4): "))
+        if length >= 4:
+            break
+        print("Length must be at least 4.")
+    except:
 
-        length = int(input("Enter password length (e.g., 8 or 12): "))
-        if length < 4:
-            print("Please choose a length of at least 4.")
-            continue
-        break
+        print("Invalid number. Try again.")
 
-    except ValueError:
 
-        print("That's not a valid number. Try again.")
+pool = string.ascii_letters + string.digits
 
-letters = string.ascii_letters   # a-z and A-Z
-digits = string.digits           # 0-9
-symbols = string.punctuation     # @, #, $, etc.
 
-all_characters = letters + digits + symbols
 
 password_chars = [
-    secrets.choice(letters),
-    secrets.choice(digits),
-    secrets.choice(symbols),
+    random.choice(string.ascii_letters),
+    random.choice(string.digits)
 ]
-password_chars += [secrets.choice(all_characters) for _ in range(length - 3)]
+password_chars += [random.choice(pool) for _ in range(length - 2)]
 
-secrets.SystemRandom().shuffle(password_chars)
+
+random.SystemRandom().shuffle(password_chars)
 password = "".join(password_chars)
 
-print("\nYour secure password is:", password)
+print(f"\nYour password: {password}")
 
-has_lower = any(c.islower() for c in password)
-has_upper = any(c.isupper() for c in password)
-has_digit = any(c.isdigit() for c in password)
-has_symbol = any(c in symbols for c in password)
-variety_score = sum([has_lower, has_upper, has_digit, has_symbol])
-
-if length < 8 or variety_score < 2:
-    print("Status: Weak Password! (Too short or too simple)")
-elif length < 12 or variety_score < 3:
-    print("Status: Medium Password. (Good for basic accounts)")
+if length < 8:
+    print("Status: Weak")
+elif length < 12:
+    print("Status: Medium")
 else:
-    print("Status: Strong Password! (Very secure)")
+    print("Status: Strong")
+
