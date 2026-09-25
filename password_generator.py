@@ -1,7 +1,7 @@
 import random
 import string
 
-print("--- Password Generator ---")
+print("PASSWORD GENERATOR")
 
 while True:
     try:
@@ -10,24 +10,14 @@ while True:
             break
         print("Length must be at least 4.")
     except:
-
         print("Invalid number. Try again.")
-
-
 pool = string.ascii_letters + string.digits
-
-
-
 password_chars = [
     random.choice(string.ascii_letters),
     random.choice(string.digits)
 ]
 password_chars += [random.choice(pool) for _ in range(length - 2)]
-
-
-random.SystemRandom().shuffle(password_chars)
 password = "".join(password_chars)
-
 print(f"\nYour password: {password}")
 
 if length < 8:
